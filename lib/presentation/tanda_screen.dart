@@ -59,7 +59,10 @@ class _TandaScreenState extends State<TandaScreen> {
               title: const Text('Turno entregado'),
               content: Text('Le toco a ' + cierre.beneficiario!.nombre + ' esta ronda!'),
               actions: [
-                TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cerrar')),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Cerrar'),
+                ),
               ],
             ),
           ),
@@ -79,12 +82,18 @@ class _TandaScreenState extends State<TandaScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           Text(
-            'Ronda actual: ' + (_tanda.turnoActual + 1).toString() + ' de ' + _tanda.ordenTurnos.length.toString(),
+            'Ronda actual: ' +
+                (_tanda.turnoActual + 1).toString() +
+                ' de ' +
+                _tanda.ordenTurnos.length.toString(),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           TweenAnimationBuilder<double>(
-            tween: Tween(begin: 0, end: totalParticipantes == 0 ? 0 : totalAportado / totalParticipantes),
+            tween: Tween(
+              begin: 0,
+              end: totalParticipantes == 0 ? 0 : totalAportado / totalParticipantes,
+            ),
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeOutCubic,
             builder: (context, valor, _) => ClipRRect(
@@ -93,12 +102,18 @@ class _TandaScreenState extends State<TandaScreen> {
             ),
           ),
           const SizedBox(height: 4),
-          Text(totalAportado.toString() + ' de ' + totalParticipantes.toString() + ' vecinos ya aportaron'),
+          Text(
+            totalAportado.toString() +
+                ' de ' +
+                totalParticipantes.toString() +
+                ' vecinos ya aportaron',
+          ),
           const SizedBox(height: 20),
           ..._tanda.participantes.asMap().entries.map((entry) {
             final participante = entry.value;
-            final esTurnoActual = _tanda.turnoActual < _tanda.ordenTurnos.length &&
-                _tanda.ordenTurnos[_tanda.turnoActual] == participante.id;
+            final esTurnoActual =
+                _tanda.turnoActual < _tanda.ordenTurnos.length &&
+                    _tanda.ordenTurnos[_tanda.turnoActual] == participante.id;
             final yaAporto = _tanda.aportacionesRondaActual.contains(participante.id);
 
             return AnimatedContainer(
@@ -120,11 +135,19 @@ class _TandaScreenState extends State<TandaScreen> {
                     color: participante.yaRecibioTurno ? Colors.green : Colors.indigo,
                   ),
                   const SizedBox(width: 10),
-                  Expanded(child: Text(participante.nombre, style: const TextStyle(fontWeight: FontWeight.w600))),
+                  Expanded(
+                    child: Text(
+                      participante.nombre,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
                   if (esTurnoActual)
                     const Padding(
                       padding: EdgeInsets.only(right: 8),
-                      child: Text('Turno actual', style: TextStyle(color: Colors.deepOrange, fontSize: 12)),
+                      child: Text(
+                        'Turno actual',
+                        style: TextStyle(color: Colors.deepOrange, fontSize: 12),
+                      ),
                     ),
                   OutlinedButton(
                     onPressed: yaAporto ? null : () => _aportar(participante.id),
