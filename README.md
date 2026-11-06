@@ -1,3 +1,3 @@
 # tanda_dolorena
 
-A new Flutter project.
+📄 [Ver PDF de Capturas de Evidencia](docs/CapturasEvidencia.pdf)
